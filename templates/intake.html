@@ -1,0 +1,52 @@
+{% extends "base.html" %}{% block title %}Patient intake | CaseFlow{% endblock %}
+{% block content %}
+<div class="page-heading"><p class="eyebrow">PATIENT MODULE</p><h1>Pre-consultation form</h1><p>Complete the seven stages. Fields marked * are required.</p></div>
+<div class="progress-wrap"><div id="progress-label">Step 1 of 7</div><div class="progress"><span id="progress-bar"></span></div></div>
+<form method="post" id="intake-form" class="panel form-panel">
+  <section class="step active">
+    <h2>1. Patient registration</h2>
+    <label>Full name *<input name="patient_name" required maxlength="100" placeholder="e.g. Alex Kumar"></label>
+    <label>Age *<input name="age" type="number" min="1" max="120" required></label>
+    <label>Email *<input name="email" type="email" required maxlength="120"></label>
+  </section>
+  <section class="step">
+    <h2>2. Main concern</h2>
+    <label>What is the main concern? *<textarea name="complaint" required rows="4" placeholder="Describe the reason for this consultation"></textarea></label>
+    <label>When did it begin? *<input name="duration" required placeholder="e.g. About three days ago"></label>
+  </section>
+  <section class="step">
+    <h2>3. Symptoms</h2>
+    <label>Describe the symptoms *<textarea name="symptoms" required rows="4" placeholder="Describe what you have noticed"></textarea></label>
+    <label>How would you describe the severity? *
+      <select name="severity" required><option value="">Choose one</option><option>Mild</option><option>Moderate</option><option>Severe</option><option>Unsure</option></select>
+    </label>
+  </section>
+  <section class="step">
+    <h2>4. Medical history</h2>
+    <label>Previous or ongoing medical conditions<textarea name="medical_history" rows="4" placeholder="Write 'None known' if not applicable"></textarea></label>
+  </section>
+  <section class="step">
+    <h2>5. Medication and allergies</h2>
+    <label>Current medications<textarea name="medications" rows="3" placeholder="Include names if known, or 'None'"></textarea></label>
+    <label>Known allergies<textarea name="allergies" rows="3" placeholder="Include medicines, foods, or other allergies, or 'None known'"></textarea></label>
+  </section>
+  <section class="step">
+    <h2>6. Additional safety questions</h2>
+    <label>Have you had a fever?
+      <select name="fever"><option>No</option><option>Yes</option><option>Unsure</option></select>
+    </label>
+    <label>Are you experiencing difficulty breathing?
+      <select name="breathing_difficulty" id="breathing"><option>No</option><option>Yes</option><option>Unsure</option></select>
+    </label>
+    <div class="notice warning" id="urgent-warning" hidden>If breathing is difficult or severe, seek urgent medical help now. Do not wait for this form or a response from this demo system.</div>
+  </section>
+  <section class="step">
+    <h2>7. Review and submit</h2>
+    <label>Anything else the clinician should know?<textarea name="additional_notes" rows="4"></textarea></label>
+    <div class="notice">Please check your answers. Your responses are patient-reported information and must be reviewed by a qualified healthcare professional.</div>
+    <label class="check"><input type="checkbox" required> I confirm this is fictional/demo information and understand CaseFlow does not provide a diagnosis.</label>
+  </section>
+  <div class="form-actions"><button type="button" class="button secondary" id="prev" disabled>Previous</button><button type="button" class="button" id="next">Next step</button><button type="submit" class="button" id="submit" hidden>Submit case</button></div>
+</form>
+<script src="{{ url_for('static', filename='intake.js') }}"></script>
+{% endblock %}

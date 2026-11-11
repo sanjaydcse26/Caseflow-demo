@@ -1,0 +1,4 @@
+{% extends "base.html" %}{% block title %}Submitted | CaseFlow{% endblock %}
+{% block content %}
+<div class="panel success-panel"><p class="eyebrow">SUBMISSION COMPLETE</p><h1>Thank you, {{ case.patient_name }}.</h1><p>Your demo case has been saved for clinician review.</p><p class="case-number">Case reference: <strong>CF-{{ "%05d"|format(case.id) }}</strong></p><a class="button" href="{{ url_for('home') }}">Back to home</a></div>
+{% endblock %}

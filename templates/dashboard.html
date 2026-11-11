@@ -1,0 +1,11 @@
+{% extends "base.html" %}{% block title %}Doctor dashboard | CaseFlow{% endblock %}
+{% block content %}
+<div class="page-heading row-between"><div><p class="eyebrow">CLINICIAN PORTAL</p><h1>Case dashboard</h1><p>Submitted patient-reported cases for review.</p></div><a class="text-link" href="{{ url_for('doctor_logout') }}">Log out</a></div>
+<div class="panel table-wrap">
+{% if cases %}
+<table><thead><tr><th>Reference</th><th>Patient</th><th>Concern</th><th>Submitted</th><th>Status</th><th></th></tr></thead><tbody>
+{% for case in cases %}<tr><td>CF-{{ "%05d"|format(case.id) }}</td><td>{{ case.patient_name }}</td><td>{{ case.complaint|truncate(55) }}</td><td>{{ case.created_at.strftime("%d %b %Y %H:%M") }}</td><td><span class="status">{{ case.status }}</span></td><td><a href="{{ url_for('case_detail', case_id=case.id) }}">Review →</a></td></tr>{% endfor %}
+</tbody></table>
+{% else %}<p>No cases submitted yet. Submit a test patient case to see it here.</p>{% endif %}
+</div>
+{% endblock %}
