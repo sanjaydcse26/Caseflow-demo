@@ -7,7 +7,7 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
-app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "dev-only-change-this-key")
+app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY") or os.urandom(32).hex()
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///caseflow.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
