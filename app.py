@@ -50,14 +50,14 @@ def doctor_required(view):
 with app.app_context():
     db.create_all()
     # Create demo account only when deployment credentials are configured.
-demo_username = os.environ.get("DEMO_DOCTOR_USERNAME")
-demo_password = os.environ.get("DEMO_DOCTOR_PASSWORD")
+    demo_username = os.environ.get("DEMO_DOCTOR_USERNAME")
+    demo_password = os.environ.get("DEMO_DOCTOR_PASSWORD")
 
-if demo_username and demo_password:
-    if not Doctor.query.filter_by(username=demo_username).first():
-        db.session.add(Doctor(
-            username=demo_username,
-            password_hash=generate_password_hash(demo_password)
+    if demo_username and demo_password:
+        if not Doctor.query.filter_by(username=demo_username).first():
+            db.session.add(Doctor(
+                username=demo_username,
+                password_hash=generate_password_hash(demo_password)
         ))
         db.session.commit()
 
