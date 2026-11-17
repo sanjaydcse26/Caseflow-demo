@@ -119,7 +119,7 @@ def doctor_login():
             session.clear()
             session["doctor_id"] = doctor.id
             return redirect(url_for("dashboard"))
-        flash("Invalid demo login details.", "error")
+        flash("Invalid username or password .", "error")
     return render_template("doctor_login.html")
 
 
